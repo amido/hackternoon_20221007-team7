@@ -1,0 +1,21 @@
+{
+    "title": "Hackternoon October 2022",
+    "output": "{{ basepath }}/output/{{ format }}",
+    "trunkBranch": "main",
+    "path": "{{ basepath }}/docs/hackternoon.adoc",
+    "pdf": {
+        "attributes": [
+            "pdf-theme={{ basepath }}/conf/pdf/theme.yml",
+            "pdf-fontsdir=\"{{ basepath }}/fonts;GEM_FONTS_DIR\"",
+            "allow-uri-read"
+        ]
+    },
+    "html": {
+        "attributes": [
+            "stylesheet={{ basepath }}/conf/html/style.css",
+            "data-uri",
+            "allow-uri-read",
+            "toc=left"
+        ]
+    }
+}

@@ -1,0 +1,14 @@
+import:
+  - ./build/taskctl/contexts.yml
+  - ./build/taskctl/tasks.yml
+
+pipelines:
+  generate:
+    - task: pdf
+    - task: html
+
+  setup:
+    - task: debug:env
+    - task: buildnumber
+      depends_on:
+        - debug:env

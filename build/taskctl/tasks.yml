@@ -1,0 +1,46 @@
+
+tasks:
+
+  buildnumber:
+    context: powershell
+    description: Update the build number
+    command:
+      - Update-BuildNumber
+
+  pdf:
+    context: asciidoc
+    description: Create PDF doc of Newsletter
+    command:
+      # - Invoke-Asciidoc -PDF -attributes @("pdf-theme=/app/conf/pdf/theme.yml", "pdf-fontsdir=`"/app/fonts;GEM_FONTS_DIR`"", "allow-uri-read") -output /app/output/pdf/${env:FILENAME} -path /app/content/${env:YEAR}/${env:MONTH}/newsletter.adoc
+      Invoke-AsciiDoc -PDF -basepath /app -config /app/docs.json
+
+  html:
+    context: asciidoc
+    description: Create HTML version of Newsletter
+    command:
+      - Invoke-Asciidoc -HTML -attributes @("stylesheet=/app/conf/html/style.css", "data-uri", "allow-uri_read", "toc=left") -output /app/output/html/${env:FILENAME} -path /app/docs/hackternoon.adoc
+
+  upload:
+    context: asciidoc
+    description: Upload HTML document to Wiki
+    command:
+      - Publish-Confluence -Title ${env:FILENAME} -Space 
+
+  debug:env:
+    context: powershell
+    description: Debugging task to show the environment variables in the container
+    command:
+      - dir env:/
+
+  debug:location:
+    context: powershell
+    command:
+      - Write-Host "***** DEBUG *****" && get-childitem -filter "*opencover.xml" -recurse
+
+  debug:sleep:
+    context: powershell
+    command:
+      - echo "Sleeping for {{ .sleep }}"
+      - sleep {{ .sleep }}
+    variables:
+      sleep: 30

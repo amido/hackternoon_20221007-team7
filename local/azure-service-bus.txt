@@ -1,0 +1,1 @@
+Endpoint=sb://hackternoon.servicebus.windows.net/;SharedAccessKeyName=hackternoon;SharedAccessKey=GikUwddRU1lUEJhac1NCt0mW7kzKyVHfIWcEba/ETTQ= 
